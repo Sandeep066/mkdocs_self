@@ -200,7 +200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -219,12 +219,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         Installation
@@ -242,7 +244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/install" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Getting started
       </a>
     </li>
@@ -252,11 +254,183 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/install/install" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Operator-based Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Operator-based Installation
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#additional-prerequisite-steps-for-non-release-version" class="md-nav__link">
+    Additional prerequisite steps for non-release version
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional prerequisite steps for non-release version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clone-the-case-bundle-repo" class="md-nav__link">
+    1. Clone the case bundle repo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-setup-a-registry-mirror" class="md-nav__link">
+    2. Setup a registry mirror
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-setup-a-global-pull-secret" class="md-nav__link">
+    3. Setup a global pull secret
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Setup a global pull secret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-take-a-backup-of-the-existing-global-pull-secret" class="md-nav__link">
+    a) Take a backup of the existing global pull secret.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-update-it-to-include-credentials-for-cpstgicrio" class="md-nav__link">
+    b) Update it to include credentials for cp.stg.icr.io.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-wml-serving-operator" class="md-nav__link">
+    Install WML Serving operator
+  </a>
+  
+    <nav class="md-nav" aria-label="Install WML Serving operator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-set-the-namespace" class="md-nav__link">
+    1. Set the namespace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-image-pull-secret" class="md-nav__link">
+    2. Configure image pull secret
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-setup-etcd" class="md-nav__link">
+    3. Setup etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Setup etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bring-your-own-etcd" class="md-nav__link">
+    Bring your own etcd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-install-the-ibm-etcd-operator-catalog" class="md-nav__link">
+    4. Install the ibm-etcd-operator-catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-install-the-opencloud-operators-catalog" class="md-nav__link">
+    5. Install the opencloud-operators catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-deploy-the-wml-serving-operator-catalog" class="md-nav__link">
+    6. Deploy the WML Serving Operator catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-install-the-wml-serving-operator" class="md-nav__link">
+    7. Install the WML Serving Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-create-a-wmlserving-instance" class="md-nav__link">
+    8. Create a WmlServing Instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-check-wmlserving-cr-status" class="md-nav__link">
+    9. Check WmlServing CR status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -296,7 +470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/predictors" class="md-nav__link">
+      <a href="../../predictors/" class="md-nav__link">
         Summary
       </a>
     </li>
@@ -679,6 +853,41 @@ The video demonstration on how to install WML Serving operator is available <a h
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting started" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Getting started
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../predictors/" class="md-footer__link md-footer__link--next" aria-label="Next: Summary" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Summary
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
