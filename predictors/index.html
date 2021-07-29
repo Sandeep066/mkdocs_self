@@ -1,0 +1,610 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Using WML Serving - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploying-a-scikit-learn-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Using WML Serving
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-a-scikit-learn-model" class="md-nav__link">
+    Deploying a scikit-learn model
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying a scikit-learn model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-a-sample-model-directly-from-our-shared-object-storage" class="md-nav__link">
+    Deploy a sample model directly from our shared object storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-deployed-model" class="md-nav__link">
+    Using the deployed model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-model" class="md-nav__link">
+    Updating the model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-more-details" class="md-nav__link">
+    For More Details
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Using WML Serving</h1>
+                
+                <p>Trained models are deployed in WML Serving via <code>Predictor</code>s. These represent a stable service endpoint behind which the underlying model can change.</p>
+<p>Models must reside on shared storage. Currently, only S3-based storage is supported but support for other types will follow. Note that model data residing at a particular path within a given storage instance is <strong>assumed to be immutable</strong>. Different versions of the same logical model are treated at the base level as independent models and must reside at different paths. In particular, where a given model server/runtime natively supports the notion of versioning (such as Nvidia Triton, TensorFlow Serving, etc), the provided path should not point to the top of a (pseudo-)directory structure containing multiple versions. Instead, point to the subdirectory which corresponds to a specific version.</p>
+<h2 id="deploying-a-scikit-learn-model">Deploying a scikit-learn model</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>The WML Serving instance should be installed in the desired namespace. See <a href="install">install docs</a> for more details.</p>
+<h3 id="deploy-a-sample-model-directly-from-our-shared-object-storage">Deploy a sample model directly from our shared object storage</h3>
+<ol>
+<li>Check the <code>storage-config</code> secret for access to shared COS instance</li>
+</ol>
+<p>A set of example models are shared via an IBM Cloud COS instance to use when getting started with WML Serving and experimenting with the provided runtimes. Access to this COS instance is set up in the <code>storage-config</code> secret.</p>
+<p>If you used quick start install then there will be a key within the storage-config secret already configured with the name <code>wml-serving-example-models</code>. If you installed WML Serving using the operator, you will have to configure the <code>storage-config</code> secret for access:</p>
+<pre><code class="language-shell">$ kubectl patch secret/storage-config -p '{&quot;data&quot;: {&quot;wml-serving-example-models&quot;: &quot;ewogICJ0eXBlIjogInMzIiwKICAiYWNjZXNzX2tleV9pZCI6ICJlY2I5ODNmMTE4MjI0MjNjYTllNDg3Zjg5OGQ1NGE4ZiIsCiAgInNlY3JldF9hY2Nlc3Nfa2V5IjogImNkYmVmZjZhMzJhZWY2YzIzNzRhZTY5ZWVmNTAzZTZkZDBjOTNkNmE3NGJjMjQ2NyIsCiAgImVuZHBvaW50X3VybCI6ICJodHRwczovL3MzLnVzLXNvdXRoLmNsb3VkLW9iamVjdC1zdG9yYWdlLmFwcGRvbWFpbi5jbG91ZCIsCiAgInJlZ2lvbiI6ICJ1cy1zb3V0aCIsCiAgImRlZmF1bHRfYnVja2V0IjogIndtbC1zZXJ2aW5nLWV4YW1wbGUtbW9kZWxzLXB1YmxpYyIKfQo=&quot;}}'
+</code></pre>
+<p>For reference the contents of the secret value for the <code>wml-serving-example-models</code> entry looks like:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;s3&quot;,
+  &quot;access_key_id&quot;: &quot;ecb983f11822423ca9e487f898d54a8f&quot;,
+  &quot;secret_access_key&quot;: &quot;cdbeff6a32aef6c2374ae69eef503e6dd0c93d6a74bc2467&quot;,
+  &quot;endpoint_url&quot;: &quot;https://s3.us-south.cloud-object-storage.appdomain.cloud&quot;,
+  &quot;region&quot;: &quot;us-south&quot;,
+  &quot;default_bucket&quot;: &quot;wml-serving-example-models-public&quot;
+}
+</code></pre>
+<p><InlineNotification></p>
+<p><strong>Note</strong> After updating the storage config secret, there may be a delay of up to 2 minutes until the change is picked up. You should take this into account when creating/updating Predictors that use storage keys which have just been added or updated - they may fail to load otherwise.</p>
+<p></InlineNotification></p>
+<p>For more details of configuring model storage, see the <a href="/predictors/setup-storage">Setup Storage</a> page.</p>
+<ol>
+<li>Create a Predictor Custom Resource to serve the sample model</li>
+</ol>
+<p>The <code>config/example-predictors</code> directory contains Predictor manifests for many of the example models. For a list of available models, see the <a href="example-models#available-models">example models documentation</a>.</p>
+<p>Here we are deploying an sklearn model located at <code>sklearn/mnist-svm.joblib</code> within the shared COS storage.</p>
+<pre><code class="language-shell"># Pulled from sample config/example-predictors/example-mlserver-sklearn-mnist-predictor.yaml
+$ kubectl apply -f - &lt;&lt;EOF
+apiVersion: wmlserving.ai.ibm.com/v1
+kind: Predictor
+metadata:
+  name: example-mnist-predictor
+spec:
+  modelType:
+    name: sklearn
+  path: sklearn/mnist-svm.joblib
+  storage:
+    s3:
+      secretKey: wml-serving-example-models
+EOF
+predictor.wmlserving.ai.ibm.com/example-mnist-predictor created
+</code></pre>
+<p>Note that <code>wml-serving-example-models</code> is the name of the secret key created/verified in the previous step.</p>
+<p>For more details go to the <a href="/predictors/predictor-spec">Predictor Spec page</a>.</p>
+<p>Once the <code>Predictor</code> is created, mlserver runtime pods are automatically started to load and serve it.</p>
+<pre><code class="language-shell">$ kubectl get pods
+
+NAME                                         READY   STATUS              RESTARTS   AGE
+wml-serving-mlserver-0.x-658b7dd689-46nwm    0/3     ContainerCreating   0          2s
+wml-serving-mlserver-0.x-658b7dd689-46nwm    0/3     ContainerCreating   0          2s
+wmlserving-controller-568c45b959-nl88c       1/1     Running             0          11m
+</code></pre>
+<ol>
+<li>Check the status of your Predictor:</li>
+</ol>
+<pre><code class="language-shell">$ kubectl get predictors
+NAME                      TYPE      AVAILABLE   ACTIVEMODEL   TARGETMODEL   TRANSITION   AGE
+example-mnist-predictor   sklearn   true        Loading                     UpToDate     60s
+
+$ kubectl get predictor example-mnist-predictor -o=jsonpath='{.status.grpcEndpoint}'
+grpc://wml-serving:8033
+</code></pre>
+<p>The states should reflect immediate availability, but may take some seconds to move from <code>Loading</code> to <code>Loaded</code>.
+Inferencing requests for this Predictor received prior to loading completion will block until it completes.</p>
+<p><InlineNotification></p>
+<p><strong>Note:</strong> When <code>ScaleToZero</code> is enabled, the first Predictor assigned to the Triton runtime may be stuck in the <code>Pending</code> state for some time while the Triton pods are being created. The Triton image is large and may take a while to download.</p>
+<p></InlineNotification></p>
+<h2 id="using-the-deployed-model">Using the deployed model</h2>
+<p>Configure your gRPC client to point to address <code>wml-serving:8033</code>. Use the protobuf-based gRPC inference service defined <a href="https://github.com/kubeflow/kfserving/blob/master/docs/predict-api/v2/required_api.md#grpc">here</a>
+to make inference requests to the model using the <code>ModelInfer</code> RPC, setting the name of the Predictor as the <code>model_name</code> field in the <code>ModelInferRequest</code> message.</p>
+<p>Here is an example of how to do this using the command-line based <a href="https://github.com/fullstorydev/grpcurl">grpcurl</a>:</p>
+<p>Port-forward to access the runtime service:</p>
+<pre><code class="language-shell"># access via localhost:8033
+$ kubectl port-forward service/wml-serving 8033
+Forwarding from 127.0.0.1:8033 -&gt; 8033
+Forwarding from [::1]:8033 -&gt; 8033
+</code></pre>
+<p>In a separate terminal window, send an inference request using the proto file from <code>fvt/proto</code> or one that you have locally. Note that you have to provide the <code>model_name</code> in the data load, which is the name of the Predictor deployed.</p>
+<pre><code class="language-shell">$ grpcurl -plaintext -proto fvt/proto/kfs_inference_v2.proto localhost:8033 list
+inference.GRPCInferenceService
+
+# run inference
+# with below input, expect output to be 8
+$ grpcurl -plaintext -proto fvt/proto/kfs_inference_v2.proto -d '{ &quot;model_name&quot;: &quot;example-mnist-predictor&quot;, &quot;inputs&quot;: [{ &quot;name&quot;: &quot;predict&quot;, &quot;shape&quot;: [1, 64], &quot;datatype&quot;: &quot;FP32&quot;, &quot;contents&quot;: { &quot;fp32_contents&quot;: [0.0, 0.0, 1.0, 11.0, 14.0, 15.0, 3.0, 0.0, 0.0, 1.0, 13.0, 16.0, 12.0, 16.0, 8.0, 0.0, 0.0, 8.0, 16.0, 4.0, 6.0, 16.0, 5.0, 0.0, 0.0, 5.0, 15.0, 11.0, 13.0, 14.0, 0.0, 0.0, 0.0, 0.0, 2.0, 12.0, 16.0, 13.0, 0.0, 0.0, 0.0, 0.0, 0.0, 13.0, 16.0, 16.0, 6.0, 0.0, 0.0, 0.0, 0.0, 16.0, 16.0, 16.0, 7.0, 0.0, 0.0, 0.0, 0.0, 11.0, 13.0, 12.0, 1.0, 0.0] }}]}' localhost:8033 inference.GRPCInferenceService.ModelInfer
+
+{
+  &quot;modelName&quot;: &quot;example-mnist-predictor-725d74f061&quot;,
+  &quot;outputs&quot;: [
+    {
+      &quot;name&quot;: &quot;predict&quot;,
+      &quot;datatype&quot;: &quot;FP32&quot;,
+      &quot;shape&quot;: [
+        &quot;1&quot;
+      ],
+      &quot;contents&quot;: {
+        &quot;fp32Contents&quot;: [
+          8
+        ]
+      }
+    }
+  ]
+}
+</code></pre>
+<h2 id="updating-the-model">Updating the model</h2>
+<p>Changes can be made to the Predictor's Spec, such as changing the target storage and/or model, without interrupting the inferencing service.
+The predictor will continue to use the prior spec/model until the new one is loaded and ready.</p>
+<p>Below, we are changing the Predictor to use a completely different model, in practice the schema of the Predictor's model would be consistent across updates even if the type of model or ML framework changes.</p>
+<pre><code class="language-shell">$ kubectl apply -f - &lt;&lt;EOF
+apiVersion: wmlserving.ai.ibm.com/v1
+kind: Predictor
+metadata:
+  name: example-mnist-predictor
+spec:
+  modelType:
+    name: tensorflow
+  # Note updated model type and location
+  path: tensorflow/mnist.savedmodel
+  storage:
+    s3:
+      secretKey: wml-serving-example-models
+EOF
+predictor.wmlserving.ai.ibm.com/example-mnist-predictor configured
+
+$ kubectl get predictors
+NAME                      TYPE      AVAILABLE   ACTIVEMODEL   TARGETMODEL   TRANSITION   AGE
+example-mnist-predictor   sklearn   true        Loaded        Loading       InProgress    10m
+</code></pre>
+<p>The "transition" state of the Predictor will be <code>InProgress</code> while waiting for the new backing model to be ready,
+and return to <code>UpToDate</code> once the transition is complete.</p>
+<pre><code class="language-shell">$ kubectl get predictors
+NAME                      TYPE      AVAILABLE   ACTIVEMODEL   TARGETMODEL   TRANSITION   AGE
+example-mnist-predictor   sklearn   true        Loaded                      UpToDate      11m
+</code></pre>
+<p>If there is a problem loading the new model (for example it does not exist at the specified path), the transition state will
+change to <code>BlockedByFailedLoad</code>, but the service will remain available. The active model state will still show as <code>Loaded</code>, and the
+Predictor remains available.</p>
+<pre><code class="language-shell">$ kubectl get predictors
+NAME                      TYPE      AVAILABLE   ACTIVEMODEL   TARGETMODEL   TRANSITION   AGE
+example-mnist-predictor   sklearn   true        Loaded        Failed        BlockedByFailedLoad    20m
+</code></pre>
+<h2 id="for-more-details">For More Details</h2>
+<ul>
+<li><a href="/predictors/setup-storage">Setup Storage</a></li>
+<li><a href="/predictors/run-inference">Inferencing</a></li>
+<li><a href="/predictors/predictor-spec">Predictor Spec</a></li>
+</ul>
+<p>A <a href="https://github.ibm.com/ai-foundation/wml-serving/blob/main/docs/demo/model_serve_post-install.ipynb">Jupyter Notebook</a> of the example can also be found in wml-serving repo.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>

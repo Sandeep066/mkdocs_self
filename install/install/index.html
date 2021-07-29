@@ -1,0 +1,724 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Operator-based Installation - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#additional-prerequisite-steps-for-non-release-version" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Operator-based Installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#additional-prerequisite-steps-for-non-release-version" class="md-nav__link">
+    Additional prerequisite steps for non-release version
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional prerequisite steps for non-release version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clone-the-case-bundle-repo" class="md-nav__link">
+    1. Clone the case bundle repo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-setup-a-registry-mirror" class="md-nav__link">
+    2. Setup a registry mirror
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-setup-a-global-pull-secret" class="md-nav__link">
+    3. Setup a global pull secret
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Setup a global pull secret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-take-a-backup-of-the-existing-global-pull-secret" class="md-nav__link">
+    a) Take a backup of the existing global pull secret.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-update-it-to-include-credentials-for-cpstgicrio" class="md-nav__link">
+    b) Update it to include credentials for cp.stg.icr.io.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-wml-serving-operator" class="md-nav__link">
+    Install WML Serving operator
+  </a>
+  
+    <nav class="md-nav" aria-label="Install WML Serving operator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-set-the-namespace" class="md-nav__link">
+    1. Set the namespace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-image-pull-secret" class="md-nav__link">
+    2. Configure image pull secret
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-setup-etcd" class="md-nav__link">
+    3. Setup etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Setup etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bring-your-own-etcd" class="md-nav__link">
+    Bring your own etcd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-install-the-ibm-etcd-operator-catalog" class="md-nav__link">
+    4. Install the ibm-etcd-operator-catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-install-the-opencloud-operators-catalog" class="md-nav__link">
+    5. Install the opencloud-operators catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-deploy-the-wml-serving-operator-catalog" class="md-nav__link">
+    6. Deploy the WML Serving Operator catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-install-the-wml-serving-operator" class="md-nav__link">
+    7. Install the WML Serving Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-create-a-wmlserving-instance" class="md-nav__link">
+    8. Create a WmlServing Instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-check-wmlserving-cr-status" class="md-nav__link">
+    9. Check WmlServing CR status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Operator-based Installation</h1>
+                
+                <p>The recommended approach to installing WML Serving is to use OLM and the operator. If you are installing in a development environment and wish to skip the operator, see <a href="install-script">No Operator Installation</a>.</p>
+<p>Download the case bundle from https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-ai-wmlserving-1.0.0.tgz</p>
+<h2 id="additional-prerequisite-steps-for-non-release-version">Additional prerequisite steps for non-release version</h2>
+<p>To use the the latest development version of the operator instead of a released one, perform these additional steps before continuing to the "Set the namespace" section.</p>
+<h3 id="1-clone-the-case-bundle-repo">1. Clone the case bundle repo</h3>
+<pre><code class="language-shell">git clone git@github.ibm.com:ai-foundation/ibm-ai-wmlserving-case-bundle.git
+</code></pre>
+<h3 id="2-setup-a-registry-mirror">2. Setup a registry mirror</h3>
+<p>Create an image mirror on the cluster which points to the staging registry.</p>
+<pre><code class="language-yaml">apiVersion: operator.openshift.io/v1alpha1
+kind: ImageContentSourcePolicy
+metadata:
+  name: mirror-config
+spec:
+  repositoryDigestMirrors:
+    - mirrors:
+        - cp.stg.icr.io/cp/ai
+      source: cp.icr.io/cp/ai
+    - mirrors:
+        - cp.stg.icr.io/cp
+      source: icr.io/cpopen
+</code></pre>
+<p>This is will restart the nodes of the cluster one by one. Wait for all the nodes to be restarted.</p>
+<h3 id="3-setup-a-global-pull-secret">3. Setup a global pull secret</h3>
+<h4 id="a-take-a-backup-of-the-existing-global-pull-secret">a) Take a backup of the existing global pull secret.</h4>
+<pre><code class="language-shell">oc get secret/pull-secret -n openshift-config -o yaml &gt; pull-secret-bk.yaml
+</code></pre>
+<h4 id="b-update-it-to-include-credentials-for-cpstgicrio">b) Update it to include credentials for <code>cp.stg.icr.io</code>.</h4>
+<pre><code class="language-shell">pull_secret=$(echo -n &quot;iamapikey:&lt;APIKEY&gt;&quot; | base64 -w0)
+
+oc get secret/pull-secret -n openshift-config -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d | sed -e 's|&quot;auths&quot;:{|&quot;auths&quot;:{&quot;cp.stg.icr.io&quot;:{&quot;auth&quot;:&quot;'$pull_secret'&quot;\},|' &gt; /tmp/dockerconfig.json
+
+oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=/tmp/dockerconfig.json
+</code></pre>
+<p>Follow the below links to get your own api key:</p>
+<ul>
+<li>https://playbook.cloudpaklab.ibm.com/entitled-registry-access/</li>
+<li>https://playbook.cloudpaklab.ibm.com/entitled-image-registry/#Read_Only_Access</li>
+</ul>
+<h2 id="install-wml-serving-operator">Install WML Serving operator</h2>
+<h3 id="1-set-the-namespace">1. Set the namespace</h3>
+<pre><code class="language-shell">export NAMESPACE=&lt;project-name&gt;
+</code></pre>
+<h3 id="2-configure-image-pull-secret">2. Configure image pull secret</h3>
+<p>You must create a pull secret called <code>ibm-entitlement-key</code> in the target namespace. For more information see the <a href="https://playbook.cloudpaklab.ibm.com/entitled-image-registry/#Utilize_entitled_registry_images_in_a_helm_chart">CloudPak Playbook</a></p>
+<pre><code class="language-shell">oc create secret docker-registry ibm-entitlement-key -n $NAMESPACE \
+  --docker-server=cp.icr.io \
+  --docker-username=&quot;cp&quot; \
+  --docker-password=&quot;&lt;APIKEY&gt;&quot;
+</code></pre>
+<p>Get the apikey from here: https://myibm.ibm.com/products-services/containerlibrary</p>
+<h3 id="3-setup-etcd">3. Setup etcd</h3>
+<p>etcd is required to run WML Serving. You can either bring your own etcd or install the <code>ibm-etcd-operator-catalog</code> so that the <code>wmlserving-operator</code> can create etcd for you.</p>
+<h4 id="bring-your-own-etcd">Bring your own etcd</h4>
+<p>Create a file named <code>etcd-config.json</code>, populating the values based upon your etcd server. The same etcd server can be shared between environments and/or namespaces, but in this case <em>the <code>root_prefix</code> must be set differently in each namespace's respective secret</em>. The complete json schema for this configuration is documented <a href="https://github.com/IBM/etcd-java/blob/master/etcd-json-schema.md">here</a>.</p>
+<pre><code class="language-json">{
+  &quot;endpoints&quot;: &quot;https://etcd-service-hostame:2379&quot;,
+  &quot;userid&quot;: &quot;userid&quot;,
+  &quot;password&quot;: &quot;password&quot;,
+  &quot;root_prefix&quot;: &quot;unique-chroot-prefix&quot;
+}
+</code></pre>
+<p>Then create the secret using the file (note that the key name within the secret must be <code>etcd_connection</code>):</p>
+<pre><code class="language-shell">oc create secret generic model-serving-etcd --from-file=etcd_connection=etcd-config.json
+</code></pre>
+<p>Place this secret name in the WmlServing CR which you will create in a later section.</p>
+<pre><code class="language-yaml">apiVersion: ai.ibm.com/v1
+kind: WmlServing
+metadata:
+  name: wmlserving-sample
+  namespace: $NAMESPACE
+spec:
+  etcd:
+    externalConnection:
+      secretName: model-serving-etcd
+</code></pre>
+<h3 id="4-install-the-ibm-etcd-operator-catalog">4. Install the ibm-etcd-operator-catalog</h3>
+<p>Deploy etcd catalog from https://github.ibm.com/CloudPakOpenContent/ibm-etcd-operator/</p>
+<pre><code class="language-yaml">apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-etcd-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: IBM etcd operator Catalog
+  publisher: IBM
+  sourceType: grpc
+  image: icr.io/cpopen/ibm-etcd-operator-catalog@sha256:dd1687d02b8fb35bc08464330471d6f6f6541c36ca56d2716d02fa071a5cc754
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+</code></pre>
+<p><strong>Note:</strong>
+The etcd-operator requires dynamic storage provisioning in order to create persistent volume claims.
+For Fyre clusters, you can ssh to the <code>inf</code> node and run <a href="https://github.ibm.com/dacleyra/ocp-on-fyre/blob/master/nfs-storage-provisioner-ocpplus.sh">this script</a> to setup an nfs provisioner.
+Other dynamic storage providers are available but out of scope of this document.</p>
+<h3 id="5-install-the-opencloud-operators-catalog">5. Install the opencloud-operators catalog</h3>
+<p>Deploy the IBM Cloud Pak foundational services catalog source which is used to install cert-manager.</p>
+<pre><code class="language-yaml">apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: opencloud-operators
+  namespace: openshift-marketplace
+spec:
+  displayName: IBMCS Operators
+  publisher: IBM
+  sourceType: grpc
+  image: icr.io/cpopen/ibm-common-service-catalog:latest
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+</code></pre>
+<h3 id="6-deploy-the-wml-serving-operator-catalog">6. Deploy the WML Serving Operator catalog</h3>
+<pre><code class="language-shell">cloudctl case launch --case ibm-ai-wmlserving-1.0.0.tgz --namespace openshift-marketplace --inventory wmlservingOperatorSetup --action install-catalog --args &quot;--registry icr.io --inputDir /tmp/saved --recursive&quot; --tolerance 1
+</code></pre>
+<h3 id="7-install-the-wml-serving-operator">7. Install the WML Serving Operator</h3>
+<pre><code class="language-shell">cloudctl case launch --case ibm-ai-wmlserving-1.0.0.tgz --tolerance 1 -n $NAMESPACE --action install-operator --inventory wmlservingOperatorSetup
+</code></pre>
+<p>All three operator pods (wmlserving, etcd and ibm-common-service) should be up and running.</p>
+<pre><code class="language-shell">$ oc get pods
+NAME                                           READY   STATUS    RESTARTS   AGE
+ibm-common-service-operator-8669686f89-64kcn   1/1     Running   0          5m20s
+ibm-etcd-operator-65d44f5fb7-5fkwq             1/1     Running   0          5m22s
+wmlserving-operator-74ffcb9976-hf7lf           1/1     Running   0          5m18s
+</code></pre>
+<h3 id="8-create-a-wmlserving-instance">8. Create a <code>WmlServing</code> Instance</h3>
+<p>To create an instance of WML Serving and start the controller, you must create a <code>WmlServing</code> resource. The following sample uses the default config:</p>
+<p><InlineNotification></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>It is mandatory to provide the <code>storageClass</code> of your dynamic storage provisioner for etcd. For details of the supported storage classes refer to the etcd operator <a href="https://github.ibm.com/CloudPakOpenContent/ibm-etcd-operator/blob/master/stable/ibm-etcd-operator-case-bundle/case/ibm-etcd-operator/README.md">documentation</a>.</li>
+<li>Currently, WML Serving CR doesn't support Update/Patch. If any change should be applied on the CR, it should be deleted and recreated again.</li>
+</ul>
+<p></InlineNotification></p>
+<pre><code class="language-shell">oc apply -f - &lt;&lt;EOF
+apiVersion: ai.ibm.com/v1
+kind: WmlServing
+metadata:
+  name: wmlserving-sample
+  namespace: $NAMESPACE
+spec:
+  etcd:
+    storageClass: &quot;managed-nfs-storage&quot;
+EOF
+</code></pre>
+<h3 id="9-check-wmlserving-cr-status">9. Check <code>WmlServing</code> CR status</h3>
+<pre><code>oc get wmlserving wmlserving-sample
+NAME                READY
+wmlserving-sample   True
+</code></pre>
+<p>When the installation is complete, you should see the following pods:</p>
+<pre><code>$ oc get pods
+NAME                                           READY   STATUS    RESTARTS   AGE
+ibm-common-service-operator-8669686f89-64kcn   1/1     Running   0          5m20s
+ibm-etcd-operator-65d44f5fb7-5fkwq             1/1     Running   0          5m22s
+wmlserving-operator-74ffcb9976-hf7lf           1/1     Running   0          5m18s
+wmlserving-controller-7dd947d49c-7x4sr         1/1     Running   0          3m18s
+wmlserving-sample-etcd-0                       1/1     Running   0          3m9s
+wmlserving-sample-etcd-1                       1/1     Running   0          2m58s
+wmlserving-sample-etcd-2                       1/1     Running   0          2m39s
+</code></pre>
+<p>By default, built-in runtime pods will not be up as the <code>ScaleToZero</code> configuration parameter is enabled. The corresponding runtime pod spins up when ever a Predictor CR gets submitted.
+Alternatively, <code>ScaleToZero</code> configuration parameter can also be disabled (see <a href="../configuration">configuration</a>) so that WML Serving will spin up all the built-in runtime pods as shown below:</p>
+<pre><code>wml-serving-mlserver-0.x-8499d6f846-kccf2          3/3     Running   0          7m59s
+wml-serving-mlserver-0.x-66cd794bd5-hvpkp          3/3     Running   0          7m59s
+wml-serving-msp-ml-server-0.x-67ddb449bb-tmhnc     3/3     Running   0          7m58s
+wml-serving-msp-ml-server-0.x-67ddb449bb-xx27p     3/3     Running   0          7m58s
+wml-serving-triton-2.x-7cf854dbf4-ft9qd            3/3     Running   0          7m58s
+wml-serving-triton-2.x-7cf854dbf4-mkmxc            3/3     Running   0          7m58s
+</code></pre>
+<p><strong>Note:</strong>
+The video demonstration on how to install WML Serving operator is available <a href="../OperatorInstallDemo.mp4">here</a>.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>

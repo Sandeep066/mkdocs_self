@@ -1,0 +1,522 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Set up Storage for Loading Models - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploy-a-sample-model-from-our-shared-object-storage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Set up Storage for Loading Models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-sample-model-from-our-shared-object-storage" class="md-nav__link">
+    Deploy a sample model from our shared object storage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-model-from-your-own-object-storage" class="md-nav__link">
+    Deploy a model from your own object storage
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Set up Storage for Loading Models</h1>
+                
+                <p>You will need access to an S3-compatible object storage, for example <a href="https://github.com/minio/minio">MinIO</a> or <a href="https://www.ibm.com/cloud/object-storage">IBM Cloud Object Storage</a>. To provide access to the object storage, use the <code>storage-config</code> secret.</p>
+<h2 id="deploy-a-sample-model-from-our-shared-object-storage">Deploy a sample model from our shared object storage</h2>
+<p>A set of example models are shared via an IBM Cloud COS instance to use when getting started with WML Serving and experimenting with the provided runtimes. Access to this COS instance needs to be set up in the <code>storage-config</code> secret.</p>
+<p>For the shared COS instance, the <code>secretKey</code> to access the models is <code>wml-serving-example-models</code>. If you used the <code>--quickstart</code> option of the install script, the <code>secretKey</code> to use for the local MinIO storage instance is <code>localMinIO</code>. If you use a different key value, be sure to update the <code>spec.storage.s3.secretKey</code> value in the Predictor.</p>
+<p>It should look something like:</p>
+<pre><code class="language-shell">$ kubectl describe secret storage-config
+Name:         storage-config
+Namespace:    wml-serving
+Labels:       indigo-service=all
+Annotations:
+Type:         Opaque
+
+Data
+====
+wml-serving-example-models:  308 bytes
+</code></pre>
+<p>If you installed WML Serving using the operator, you will have to configure the <code>storage-config</code> secret for access:</p>
+<pre><code class="language-shell">$ kubectl patch secret/storage-config -p '{&quot;data&quot;: {&quot;wml-serving-example-models&quot;: &quot;ewogICJ0eXBlIjogInMzIiwKICAiYWNjZXNzX2tleV9pZCI6ICJlY2I5ODNmMTE4MjI0MjNjYTllNDg3Zjg5OGQ1NGE4ZiIsCiAgInNlY3JldF9hY2Nlc3Nfa2V5IjogImNkYmVmZjZhMzJhZWY2YzIzNzRhZTY5ZWVmNTAzZTZkZDBjOTNkNmE3NGJjMjQ2NyIsCiAgImVuZHBvaW50X3VybCI6ICJodHRwczovL3MzLnVzLXNvdXRoLmNsb3VkLW9iamVjdC1zdG9yYWdlLmFwcGRvbWFpbi5jbG91ZCIsCiAgInJlZ2lvbiI6ICJ1cy1zb3V0aCIsCiAgImRlZmF1bHRfYnVja2V0IjogIndtbC1zZXJ2aW5nLWV4YW1wbGUtbW9kZWxzLXB1YmxpYyIKfQo=&quot;}}'
+</code></pre>
+<p>For reference the contents of the secret value for the <code>wml-serving-example-models</code> entry looks like:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;s3&quot;,
+  &quot;access_key_id&quot;: &quot;ecb983f11822423ca9e487f898d54a8f&quot;,
+  &quot;secret_access_key&quot;: &quot;cdbeff6a32aef6c2374ae69eef503e6dd0c93d6a74bc2467&quot;,
+  &quot;endpoint_url&quot;: &quot;https://s3.us-south.cloud-object-storage.appdomain.cloud&quot;,
+  &quot;region&quot;: &quot;us-south&quot;,
+  &quot;default_bucket&quot;: &quot;wml-serving-example-models-public&quot;
+}
+</code></pre>
+<p><InlineNotification></p>
+<p><strong>Note</strong> After updating the storage config secret, there may be a delay of up to 2 minutes until the change is picked up. You should take this into account when creating/updating Predictors that use storage keys which have just been added or updated - they may fail to load otherwise.</p>
+<p></InlineNotification></p>
+<h2 id="deploy-a-model-from-your-own-object-storage">Deploy a model from your own object storage</h2>
+<ol>
+<li>Download sample model or use an existing model</li>
+</ol>
+<p>Here we show an example using an MLeap-format model for <a href="https://github.com/combust/mleap/raw/master/mleap-benchmark/src/main/resources/models/airbnb.model.lr.zip">AirBnB Linear Regression</a>.</p>
+<ol>
+<li>Add your MLeap saved model to S3-based object storage</li>
+</ol>
+<p>A bucket in MinIO needs to be created to copy the model into, which either requires <a href="https://docs.min.io/docs/minio-client-quickstart-guide.html">MinIO Client</a> or port-forwarding the minio service and logging in using the web interface.</p>
+<pre><code class="language-shell"># Install minio client
+$ brew install minio/stable/mc
+$ mc --help
+NAME:
+  mc - MinIO Client for cloud storage and filesystems.
+....
+
+# test setup - mc is pre-configured with https://play.min.io, aliased as &quot;play&quot;.
+# list all buckets in play
+$ mc ls play
+
+[2021-06-10 21:04:25 EDT]     0B 2063b651-92a3-4a20-a4a5-03a96e7c5a89/
+[2021-06-11 02:40:33 EDT]     0B 5ddfe44282319c500c3a4f9b/
+[2021-06-11 05:15:45 EDT]     0B 6dkmmiqcdho1zoloomsj3620cocs6iij/
+[2021-06-11 02:39:54 EDT]     0B 9jo5omejcyyr62iizn02ex982eapipjr/
+[2021-06-11 02:33:53 EDT]     0B a-test-zip/
+[2021-06-11 09:14:28 EDT]     0B aio-ato/
+[2021-06-11 09:14:29 EDT]     0B aio-ato-art/
+...
+
+# add cloud storage service
+$ mc alias set &lt;ALIAS&gt; &lt;YOUR-S3-ENDPOINT&gt; [YOUR-ACCESS-KEY] [YOUR-SECRET-KEY]
+# for example if you installed with --quickstart
+$ mc alias set myminio http://localhost:9000 EXAMPLE_ACESS_KEY example/secret/EXAMPLEKEY
+Added `myminio` successfully.
+
+# create bucket
+$ mc mb myminio/models/mleap
+Bucket created successfully myminio/models/mleap.
+
+$ mc tree myminio
+myminio
+└─ models
+   └─ mleap
+
+# copy object -- must copy into an existing bucket
+$ mc cp ~/Downloads/airbnb.model.lr.zip myminio/models/mleap
+...model.lr.zip:  14.90 KiB / 14.90 KiB  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  2.74 MiB/s 0s
+
+$ mc ls myminio/models/mleap
+[2021-06-11 11:55:48 EDT]  15KiB airbnb.model.lr.zip
+</code></pre>
+<ol>
+<li>Add a storage entry to the <code>storage-config</code> secret</li>
+</ol>
+<p>Ensure there is a key defined in the common <code>storage-config</code> secret corresponding to the S3-based storage instance holding your model. The value of this secret key should be JSON like the following, <code>default_bucket</code> is optional.</p>
+<p>Users can specify use of a custom certificate via the storage config <code>certificate</code> parameter. The custom certificate should be in the form of an embedded Certificate Authority (CA) bundle in PEM format.</p>
+<p>Using MinIO the JSON contents look like:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;s3&quot;,
+  &quot;access_key_id&quot;: &quot;minioadmin&quot;,
+  &quot;secret_access_key&quot;: &quot;minioadmin/K7JTCMP/EXAMPLEKEY&quot;,
+  &quot;endpoint_url&quot;: &quot;http://127.0.0.1:9000:9000&quot;,
+  &quot;default_bucket&quot;: &quot;&quot;,
+  &quot;region&quot;: &quot;us-east&quot;
+}
+</code></pre>
+<p>Remember that after updating the storage config secret, there may be a delay of up to 2 minutes until the change is picked up. You should take this into account when creating/updating Predictors that use storage keys which have just been added or updated - they may fail to load otherwise.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,592 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Inferencing - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#send-an-inference-request-to-your-predictor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Inferencing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#send-an-inference-request-to-your-predictor" class="md-nav__link">
+    Send an inference request to your Predictor
+  </a>
+  
+    <nav class="md-nav" aria-label="Send an inference request to your Predictor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-grpc-client" class="md-nav__link">
+    Configure gRPC client
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure gRPC client">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    Java
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    Go
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodejs" class="md-nav__link">
+    NodeJS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-access-service-from-outside-the-cluster-without-a-nodeport" class="md-nav__link">
+    How to access service from outside the cluster without a NodePort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grpcurl-example" class="md-nav__link">
+    grpcurl Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Inferencing</h1>
+                
+                <h2 id="send-an-inference-request-to-your-predictor">Send an inference request to your Predictor</h2>
+<h3 id="configure-grpc-client">Configure gRPC client</h3>
+<p>Configure your gRPC client to point to address <code>wml-serving:8033</code>, which is based on the kube-dns address and port corresponding to the service. Use the protobuf-based gRPC inference service defined <a href="https://github.com/kubeflow/kfserving/blob/master/docs/predict-api/v2/required_api.md#grpc">here</a> to make inference requests to the model using the <code>ModelInfer</code> RPC, setting the name of the Predictor as the <code>model_name</code> field in the <code>ModelInferRequest</code> message.</p>
+<p>Configure the gRPC clients which talk to your service to explicitly use:</p>
+<ul>
+<li>The <code>round_robin</code> loadbalancer policy</li>
+<li>A target URI string starting with <code>dns://</code> and based on the kube-dns address and port corresponding to the service, for example <code>dns:///model-mesh-test.wml-serving:8033</code> where <code>wml-serving</code> is the namespace, or just <code>dns:///model-mesh-test:8033</code> if the client resides in the same namespace. Note that you end up needing three consecutive <code>/</code>'s in total.</li>
+</ul>
+<p>Not all languages have built-in support for this but most of the primary ones do. It's recommended to use the latest version of gRPC regardless. Here are some examples for specific languages (note other config such as TLS is omitted):</p>
+<h4 id="java">Java</h4>
+<pre><code class="language-java">ManagedChannel channel = NettyChannelBuilder.forTarget(&quot;wml-serving:8033&quot;)
+    .defaultLoadBalancingPolicy(&quot;round_robin&quot;).build();
+</code></pre>
+<p>Note that this was done differently in earlier versions of grpc-java - if this does not compile ensure you upgrade.</p>
+<h4 id="go">Go</h4>
+<pre><code class="language-go">ctx, cancel := context.WithTimeout(context.Background(), 5  * time.Second)
+defer cancel()
+grpc.DialContext(ctx, &quot;wml-serving:8033&quot;, grpc.WithBlock(), grpc.WithDefaultServiceConfig(`{&quot;loadBalancingPolicy&quot;:&quot;round_robin&quot;}`))
+</code></pre>
+<h4 id="python">Python</h4>
+<pre><code class="language-python">credentials = grpc.ssl_channel_credentials(certificate_data_bytes)
+channel_options = ((&quot;grpc.lb_policy_name&quot;, &quot;round_robin&quot;),)
+channel = grpc.secure_channel(target, credentials, options=channel_options)
+</code></pre>
+<h4 id="nodejs">NodeJS</h4>
+<p>Using: https://www.npmjs.com/package/grpc</p>
+<pre><code class="language-javascript">// Read certificate
+const cert = readFileSync(sslCertPath);
+
+credentials = grpc.credentials.createSsl(cert);
+// For insecure
+credentials = grpc.credentials.createInsecure();
+
+// Create client
+const clientOptions = {
+  &quot;grpc.lb_policy_name&quot;: &quot;round_robin&quot;,
+};
+// Get ModelMeshClient from grpc protobuf file
+const client = ModelMeshClient(model_mesh_uri, credentials, clientOptions);
+
+// Get rpc prototype for server
+const response = await rpcProtoType.call(client, message);
+</code></pre>
+<h3 id="how-to-access-service-from-outside-the-cluster-without-a-nodeport">How to access service from outside the cluster without a NodePort</h3>
+<p>Using <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/"><code>kubectl port-forward</code></a>:</p>
+<pre><code class="language-shell">kubectl port-forward wml-serving 8033:8033
+</code></pre>
+<p>This assumes you are using port 8033, change the source and/or destination ports as appropriate.</p>
+<p>Then change your client target string to localhost:8033, where 8033 is the chosen source port.</p>
+<h3 id="grpcurl-example">grpcurl Example</h3>
+<p>Here is an example of how to do this using the command-line based <a href="https://github.com/fullstorydev/grpcurl">grpcurl</a>:</p>
+<ol>
+<li>Install grpcurl:</li>
+</ol>
+<pre><code class="language-shell">$ grpcurl --version
+grpcurl 1.8.1
+
+# If it doesn't exist
+$ brew install grpcurl
+</code></pre>
+<ol>
+<li>Port-forward to access the runtime service:</li>
+</ol>
+<pre><code class="language-shell"># access via localhost:8033
+$ kubectl port-forward service/wml-serving 8033
+Forwarding from 127.0.0.1:8033 -&gt; 8033
+Forwarding from [::1]:8033 -&gt; 8033
+</code></pre>
+<ol>
+<li>In a separate terminal window, send an inference request using the proto file from <code>fvt/proto</code> or one that you have locally:</li>
+</ol>
+<pre><code class="language-shell">$ grpcurl -plaintext -proto fvt/proto/kfs_inference_v2.proto localhost:8033 list
+inference.GRPCInferenceService
+
+# run inference
+# with below input, expect output to be 8
+$ grpcurl \
+  -plaintext \
+  -proto fvt/proto/kfs_inference_v2.proto \
+  -d '{ &quot;model_name&quot;: &quot;example-mnist-predictor&quot;, &quot;inputs&quot;: [{ &quot;name&quot;: &quot;predict&quot;, &quot;shape&quot;: [1, 64], &quot;datatype&quot;: &quot;FP32&quot;, &quot;contents&quot;: { &quot;fp32_contents&quot;: [0.0, 0.0, 1.0, 11.0, 14.0, 15.0, 3.0, 0.0, 0.0, 1.0, 13.0, 16.0, 12.0, 16.0, 8.0, 0.0, 0.0, 8.0, 16.0, 4.0, 6.0, 16.0, 5.0, 0.0, 0.0, 5.0, 15.0, 11.0, 13.0, 14.0, 0.0, 0.0, 0.0, 0.0, 2.0, 12.0, 16.0, 13.0, 0.0, 0.0, 0.0, 0.0, 0.0, 13.0, 16.0, 16.0, 6.0, 0.0, 0.0, 0.0, 0.0, 16.0, 16.0, 16.0, 7.0, 0.0, 0.0, 0.0, 0.0, 11.0, 13.0, 12.0, 1.0, 0.0] }}]}' \
+  localhost:8033 \
+  inference.GRPCInferenceService.ModelInfer
+
+{
+  &quot;modelName&quot;: &quot;example-mnist-predictor-725d74f061&quot;,
+  &quot;outputs&quot;: [
+    {
+      &quot;name&quot;: &quot;predict&quot;,
+      &quot;datatype&quot;: &quot;FP32&quot;,
+      &quot;shape&quot;: [
+        &quot;1&quot;
+      ],
+      &quot;contents&quot;: {
+        &quot;fp32Contents&quot;: [
+          8
+        ]
+      }
+    }
+  ]
+}
+</code></pre>
+<p>Note that you have to provide the <code>model_name</code> in the data load, which is the name of the Predictor deployed.</p>
+<p>If a custom serving runtime which doesn't use the KFS V2 API is being used, the <code>mm-vmodel-id</code> header must be set to the Predictor name.</p>
+<p>If you are sure the requests from your client are being routed in such a way that balances evenly across the cluster (as described <a href="#configure-grpc-client">above</a>), you should include an additional metadata parameter <code>mm-balanced = true</code>. This allows some internal performance optimizations but should not be included if the source if the requests is not properly balanced.</p>
+<p>For example adding these headers to the above grpcurl command:</p>
+<pre><code class="language-shell">grpcurl \
+  -plaintext \
+  -proto fvt/proto/kfs_inference_v2.proto \
+  -rpc-header mm-vmodel-id:example-sklearn-mnist-svm \
+  -rpc-header mm-balanced:true \
+  -d '{ &quot;model_name&quot;: &quot;example-sklearn-mnist-svm&quot;, &quot;inputs&quot;: [{ &quot;name&quot;: &quot;predict&quot;, &quot;shape&quot;: [1, 64], &quot;datatype&quot;: &quot;FP32&quot;, &quot;contents&quot;: { &quot;fp32_contents&quot;: [0.0, 0.0, 1.0, 11.0, 14.0, 15.0, 3.0, 0.0, 0.0, 1.0, 13.0, 16.0, 12.0, 16.0, 8.0, 0.0, 0.0, 8.0, 16.0, 4.0, 6.0, 16.0, 5.0, 0.0, 0.0, 5.0, 15.0, 11.0, 13.0, 14.0, 0.0, 0.0, 0.0, 0.0, 2.0, 12.0, 16.0, 13.0, 0.0, 0.0, 0.0, 0.0, 0.0, 13.0, 16.0, 16.0, 6.0, 0.0, 0.0, 0.0, 0.0, 16.0, 16.0, 16.0, 7.0, 0.0, 0.0, 0.0, 0.0, 11.0, 13.0, 12.0, 1.0, 0.0] }}]}' \
+  localhost:8033 \
+  inference.GRPCInferenceService.ModelInfer
+</code></pre>
+<p>A <a href="https://github.ibm.com/ai-foundation/wml-serving/blob/main/docs/demo/model_serve_post-install.ipynb">Jupyter Notebook</a> of the example with an additional Tensorflow example can also be found in wml-serving repo.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>

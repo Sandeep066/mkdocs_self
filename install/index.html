@@ -1,0 +1,558 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Getting Started - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="prerequisites">Prerequisites</h1>
+<ul>
+<li>
+<p><strong>Kubernetes cluster</strong> - An Openshift cluster running on Openshift 4.6+. You will need <code>cluster-admin</code> authority in order to complete all of the prescribed steps.</p>
+</li>
+<li>
+<p><strong>cloudctl</strong> - Download latest version of cloudctl CLI from <a href="https://github.com/IBM/cloud-pak-cli/releases">Cloud Pak CLI</a>.</p>
+</li>
+<li>
+<p><strong>oc</strong> - Install the latest version of OpenShift CLI from <a href="https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html">oc CLI</a>.</p>
+</li>
+<li>
+<p><strong>etcd</strong> - WML Serving requires an <a href="https://etcd.io/">etcd</a> server in order to coordinate internal state which can be either dedicated or shared. More on this later.</p>
+</li>
+<li>
+<p><strong>S3-compatible object storage</strong> - Before models can be deployed, a remote S3-compatible datastore is needed from which to pull the model data. This could be for example an <a href="https://www.ibm.com/cloud/object-storage">IBM Cloud Object Storage</a> instance, or a locally running <a href="https://github.com/minio/minio">MinIO</a> deployment. Note that this is not required to be in place prior to the initial installation.</p>
+</li>
+</ul>
+<h1 id="namespace-scope">Namespace Scope</h1>
+<p>WML Serving is namespace scoped, meaning all of its components must exist within a single namespace and only one instance of WML Serving can be installed per namespace. This applies to the WML Serving Operator as well. Multiple WML Serving instances can be installed in separate namespaces within the cluster.</p>
+<p>Start your installation by creating a new namespace.</p>
+<pre><code>oc new-project &lt;namespace-name&gt;
+</code></pre>
+<h1 id="deployed-components">Deployed Components</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Type</th>
+<th>Pod</th>
+<th>Count</th>
+<th>Default CPU request/limit per-pod</th>
+<th>Default mem request/limit per-pod</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Operator</td>
+<td>Common service operator</td>
+<td>1</td>
+<td>100m / 500m</td>
+<td>200Mi / 512Mi</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Operator</td>
+<td>ETCD operator</td>
+<td>1</td>
+<td>100m / 500m</td>
+<td>100Mi / 500Mi</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Operator</td>
+<td>WML serving operator</td>
+<td>1</td>
+<td>50m / 500m</td>
+<td>40Mi / 40Mi</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Controller</td>
+<td>WML serving controller</td>
+<td>1</td>
+<td>50m / 1</td>
+<td>96Mi / 512Mi</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Metastore</td>
+<td>ETCD pods</td>
+<td>3</td>
+<td>200m / 200m</td>
+<td>512Mi / 512Mi</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Built-in Runtime</td>
+<td>Nvidia Triton runtime Pods</td>
+<td>0 (*)</td>
+<td>850m / 10</td>
+<td>1568Mi / 1984Mi</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Built-in Runtime</td>
+<td>The MSP Server runtime Pods</td>
+<td>0 (*)</td>
+<td>850m / 10</td>
+<td>1568Mi / 1984Mi</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Built-in Runtime</td>
+<td>The MLServer runtime Pods</td>
+<td>0 (*)</td>
+<td>850m / 10</td>
+<td>1568Mi / 1984Mi</td>
+</tr>
+<tr>
+<td><strong>totals</strong></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td>900m / 3.1</td>
+<td>1.925Gi / 3.02Gi</td>
+</tr>
+</tbody>
+</table>
+<p>(*) <a href="production-use/scaling#scale-to-zero"><code>ScaleToZero</code></a> is enabled by default, so runtimes will have 0 replicas until a Predictor is created that uses that runtime. Once a Predictor is assigned, the runtime pods will scale up to 2.</p>
+<p>When WML serving operator is installed, pods shown in 1 - 3 are created.</p>
+<p>When WML serving instance is created with default, internal ETCD connection, pods shown in 4 and 5 are created. When WML serving instance is created with external ETCD connection, pod shown in 4 is created.</p>
+<p>When <code>ScaleToZero</code> <strong>is enabled</strong>, deployments for runtime pods will be scaled to 0 when there are no Predictors for that runtime. When <code>ScaletoZero</code> is enabled and first predictor CR is submitted, WML serving will spin up the corresponding built-in runtime pods.</p>
+<p>When <code>ScaletoZero</code> is <strong>disabled</strong>, pods shown in 6 to 8 are created, with a total CPU(request/limit) of 6/63.1 and total memory(request/limit) of 11.11Gi/14.652Gi.</p>
+<p>The deployed footprint can be significantly reduced in the following ways:</p>
+<ul>
+<li>
+<p>Individual built-in runtimes can be disabled by setting <code>disabled: true</code> in their corresponding <code>ServingRuntime</code> resource - if the corresponding model types aren't used.</p>
+</li>
+<li>
+<p>The number of Pods per runtime can be changed from the default of 2 (e.g. down to 1), via the <code>podsPerRuntime</code> global configuration parameter (see <a href="configuration">configuration</a>). It is recommended for this value to be a minimum of 2 for production deployments.</p>
+</li>
+<li>
+<p>Memory and/or CPU resource allocations can be reduced (or increased) on the primary model server container in either of the built-in <code>ServingRuntime</code> resources (container name <code>triton</code> or <code>mleap</code>). This has the effect of adjusting the total capacity available for holding served models in memory.</p>
+</li>
+</ul>
+<pre><code class="language-shell">&gt; oc edit servingruntime triton-2.x
+&gt; oc edit servingruntime msp-ml-server-0.x
+&gt; oc edit servingruntime mlserver-0.x
+</code></pre>
+<p><InlineNotification></p>
+<p><strong>Note</strong> The MLServer runtime is only present in WML Serving versions &gt;= 0.3.0</p>
+<p></InlineNotification></p>
+<p>Please be aware that:</p>
+<ol>
+<li>Changes made to the <em>built-in</em> runtime resources will likely be reverted when upgrading/re-installing</li>
+<li>Most of this resource allocation behaviour/config will change in future versions to become more dynamic - both the number of pods deployed and the system resources allocated to them</li>
+</ol>
+<p>In addition, the following resources will be created in the same namespace:</p>
+<ul>
+<li><code>model-serving-defaults</code> - ConfigMap holding default values tied to a release, should not be modified. Configuration can be overriden by creating a user ConfigMap, see <a href="configuration">configuration</a></li>
+<li><code>tc-config</code> - ConfigMap used for some internal coordination</li>
+<li><code>storage-config</code> - Secret holding config for each of the storage backends from which models can be loaded - see <a href="predictors">the example</a></li>
+</ul>
+<h1 id="next-steps">Next Steps</h1>
+<ul>
+<li>
+<p><a href="install/install">Install using OLM and operator</a></p>
+</li>
+<li>
+<p>See <a href="configuration">the configuration page</a> for details of how to configure system-wide settings via a ConfigMap, either before or after installation.</p>
+</li>
+<li>
+<p>See this <a href="predictors">example walkthrough</a> of deploying a TensorFlow model as a <code>Predictor</code>.</p>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>

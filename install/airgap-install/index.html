@@ -1,0 +1,625 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+    
+    
+      
+        <title>Airgap Installation - Watson Core | WML Serving - 0.3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#step-by-step-instructions-to-setup-and-install-wml-serving-operator-in-airgap-environment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-header__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Watson Core | WML Serving - 0.3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Airgap Installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Watson Core | WML Serving - 0.3.0" class="md-nav__button md-logo" aria-label="Watson Core | WML Serving - 0.3.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Watson Core | WML Serving - 0.3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Version Selector
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/install/install" class="md-nav__link">
+        Operator-based Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Deploying models as Predictors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deploying models as Predictors" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying models as Predictors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/predictors" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-instructions-to-setup-and-install-wml-serving-operator-in-airgap-environment" class="md-nav__link">
+    Step-by-Step Instructions to setup and install wml-serving operator in Airgap environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-Step Instructions to setup and install wml-serving operator in Airgap environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-setup-env" class="md-nav__link">
+    0. Setup ENV
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-compress-the-wml-serving-case-bundle-and-upload-it-to-airgap-cluster" class="md-nav__link">
+    1. Compress the wml-serving case bundle and upload it to airgap cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-extract-the-latest-ibm-ai-wmlserving-case-bundletar-file" class="md-nav__link">
+    2. Extract the latest ibm-ai-wmlserving-case-bundle.tar file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-create-a-temp-docker-registry-this-act-as-a-customer-registry-in-this-case-we-use-hyc-wml-devops-team-air-gap-test-docker-localartifactoryswg-devopscom-as-a-customer-registry" class="md-nav__link">
+    3. Create a temp docker registry - this act as a customer registry. In this case we use hyc-wml-devops-team-air-gap-test-docker-local.artifactory.swg-devops.com as a customer registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-download-the-case-using-cloudctl-command" class="md-nav__link">
+    4. Download the case using cloudctl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-replace-the-prod-resgitry-to-the-internal-registry-that-contain-the-paid-content-image" class="md-nav__link">
+    5. Replace the prod resgitry to the internal registry that contain the paid content image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-set-up-temporary-registry-service-you-might-need-to-install-this-package-sudo-yum-install-httpd-tools-y-if-it-is-not-installed-yet" class="md-nav__link">
+    6. Set up temporary registry service (You might need to install this package: sudo yum install httpd-tools -y if it is not installed yet)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-create-a-source-registry-credential" class="md-nav__link">
+    7. Create a source registry credential
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-create-a-destination-registry-credential" class="md-nav__link">
+    8. Create a destination registry credential
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-mirror-the-images" class="md-nav__link">
+    9. Mirror the images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-configure-cluster-with-imagecontentsourcepolicy" class="md-nav__link">
+    10. Configure cluster with ImageContentSourcePolicy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-update-the-imagecontentsourcepolicy" class="md-nav__link">
+    11. Update the ImageContentSourcePolicy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-run-the-catalog-installation-test" class="md-nav__link">
+    12. Run the Catalog installation test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-run-the-operator-installation-test" class="md-nav__link">
+    13. Run the Operator installation test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Airgap Installation</h1>
+                
+                <h3 id="step-by-step-instructions-to-setup-and-install-wml-serving-operator-in-airgap-environment">Step-by-Step Instructions to setup and install wml-serving operator in Airgap environment</h3>
+<h4 id="0-setup-env">0. Setup ENV</h4>
+<pre><code>export CASENAME=ibm-ai-wmlserving
+export OFFLINEDIR=ibm-ai-wmlserving-archive
+export NS=airgap-test
+export ITEM=wmlservingOperatorSetup
+export ACTION=install-catalog
+export SOURCE_REGISTRY=cp.stg.icr.io
+export SOURCE_REGISTRY_USER=xxxxxxxxx
+export SOURCE_REGISTRY_PASS=xxxxxxxxx
+export TARGET_REGISTRY=hyc-wml-devops-team-air-gap-test-docker-local.artifactory.swg-devops.com
+export TARGET_REGISTRY_USER=xxxxxxxxx
+export TARGET_REGISTRY_PASS=xxxxxxxxx
+oc new-project $NS
+</code></pre>
+<h4 id="1-compress-the-wml-serving-case-bundle-and-upload-it-to-airgap-cluster">1. Compress the wml-serving case bundle and upload it to airgap cluster</h4>
+<pre><code>git clone git@github.ibm.com:ai-foundation/ibm-ai-wmlserving-case-bundle.git --recursive
+tar -czvf ibm-ai-wmlserving-case-bundle.tar ibm-ai-wmlserving-case-bundle
+</code></pre>
+<h4 id="2-extract-the-latest-ibm-ai-wmlserving-case-bundletar-file">2. Extract the latest ibm-ai-wmlserving-case-bundle.tar file</h4>
+<p><code>tar xzvf ibm-ai-wmlserving-case-bundle.tar</code></p>
+<p>Note: To copy case bundle tarball to airgap cluster , Use either one of the approach</p>
+<ul>
+<li>Use a mount point where the tarball is present</li>
+<li>Use USBDrive which has the required tarball and copy it to airgap cluster</li>
+</ul>
+<h4 id="3-create-a-temp-docker-registry-this-act-as-a-customer-registry-in-this-case-we-use-hyc-wml-devops-team-air-gap-test-docker-localartifactoryswg-devopscom-as-a-customer-registry">3. Create a temp docker registry - this act as a customer registry. In this case we use <code>hyc-wml-devops-team-air-gap-test-docker-local.artifactory.swg-devops.com</code> as a customer registry</h4>
+<h4 id="4-download-the-case-using-cloudctl-command">4. Download the case using cloudctl command</h4>
+<p>cd to case directory</p>
+<pre><code>cloudctl case save -c ibm-ai-wmlserving  -t 1 -o ibm-ai-wmlserving-archive
+</code></pre>
+<h4 id="5-replace-the-prod-resgitry-to-the-internal-registry-that-contain-the-paid-content-image">5. Replace the prod resgitry to the internal registry that contain the paid content image</h4>
+<p>Update <code>ibm-ai-wmlserving-archive/ibm-ai-wmlserving-1.0.0-images.csv</code> file pointing
+registry to <code>cp.stg.icr.io</code>
+image_name to <code>cp/ai-foundation/&lt;image_name&gt;</code></p>
+<h4 id="6-set-up-temporary-registry-service-you-might-need-to-install-this-package-sudo-yum-install-httpd-tools-y-if-it-is-not-installed-yet">6. Set up temporary registry service (You might need to install this package: <code>sudo yum install httpd-tools -y</code> if it is not installed yet)</h4>
+<pre><code>ibm-ai-wmlserving/inventory/wmlservingOperatorSetup/files/airgap.sh registry service init
+</code></pre>
+<h4 id="7-create-a-source-registry-credential">7. Create a source registry credential</h4>
+<pre><code>cloudctl case launch \
+--case $CASENAME \
+--namespace $NS \
+--inventory $ITEM \
+--action configure-creds-airgap \
+--args &quot;--registry $SOURCE_REGISTRY --user $SOURCE_REGISTRY_USER --pass $SOURCE_REGISTRY_PASS&quot; \
+--tolerance 1
+</code></pre>
+<h4 id="8-create-a-destination-registry-credential">8. Create a destination registry credential</h4>
+<pre><code>cloudctl case launch  \
+  --case $CASENAME    \
+  --namespace $NS     \
+  --inventory $ITEM   \
+  --action configure-creds-airgap  \
+  --args &quot;--registry $TARGET_REGISTRY --user $TARGET_REGISTRY_USER --pass $TARGET_REGISTRY_PASS&quot; \
+  --tolerance 1
+</code></pre>
+<h4 id="9-mirror-the-images">9. Mirror the images</h4>
+<pre><code>cloudctl case launch  \
+  --case $CASENAME    \
+  --namespace $NS     \
+  --inventory $ITEM   \
+  --action mirror-images  \
+  --args &quot;--registry $TARGET_REGISTRY --inputDir $OFFLINEDIR&quot; \
+  --tolerance 1
+</code></pre>
+<h4 id="10-configure-cluster-with-imagecontentsourcepolicy">10. Configure cluster with <code>ImageContentSourcePolicy</code></h4>
+<pre><code>cloudctl case launch  \
+  --case $CASENAME    \
+  --namespace $NS     \
+  --inventory $ITEM   \
+  --action configure-cluster-airgap  \
+  --args &quot;--registry $TARGET_REGISTRY --inputDir $OFFLINEDIR &quot; \
+  --tolerance 1
+</code></pre>
+<h4 id="11-update-the-imagecontentsourcepolicy">11. Update the <code>ImageContentSourcePolicy</code></h4>
+<ul>
+<li>oc edit ImageContentSourcePolicy ibm-ai-wmlserving</li>
+<li>Add the below entries under <code>spec</code>--<code>repositoryDigestMirrors</code></li>
+</ul>
+<pre><code>  - mirrors:
+    - hyc-wml-devops-team-air-gap-test-docker-local.artifactory.swg-devops.com/cp/ai-foundation
+    source: cp.icr.io/cp/ai
+  - mirrors:
+    - hyc-wml-devops-team-air-gap-test-docker-local.artifactory.swg-devops.com/cp/ai-foundation
+    source: icr.io/cpopen
+</code></pre>
+<p><strong><em>Please note that this would restart all the nodes , please wait till all the nodes are restarted and back to Ready state</em></strong></p>
+<h4 id="12-run-the-catalog-installation-test">12. Run the Catalog installation test</h4>
+<pre><code>cloudctl case launch  \
+  --case $CASENAME    \
+  --namespace openshift-marketplace   \
+  --inventory $ITEM   \
+  --action $ACTION \
+  --args &quot;--registry icr.io --inputDir $OFFLINEDIR --recursive&quot; \
+  --tolerance 1
+</code></pre>
+<h4 id="13-run-the-operator-installation-test">13. Run the Operator installation test</h4>
+<p><code>export ACTION=install-operator</code></p>
+<pre><code>cloudctl case launch  \
+  --case $CASENAME  \
+  --namespace $NS     \
+  --action $ACTION \
+  --inventory $ITEM   \
+  --tolerance 1
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
+      
+    
+  </body>
+</html>
